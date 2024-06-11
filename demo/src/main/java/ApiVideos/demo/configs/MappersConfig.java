@@ -10,13 +10,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MappersConfig {
     @Bean
-    public ModelMapper modelMapper(){return new ModelMapper();}
+    public ModelMapper modelMaper(){
+        return new ModelMapper();
+    }
 
-    @Bean("mergerMapper")
-    public ModelMapper mergerMapper(){
+    @Bean("Merge Mapper")
+    public ModelMapper mergeMaper(){
         ModelMapper mapper = new ModelMapper();
-        mapper.getConfiguration()
-                .setPropertyCondition(Conditions.isNotNull());
+
+        mapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+
         return mapper;
     }
 

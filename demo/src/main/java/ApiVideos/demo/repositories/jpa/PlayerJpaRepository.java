@@ -10,11 +10,17 @@ import java.util.Optional;
 
 @Repository
 public interface PlayerJpaRepository extends JpaRepository<PlayerEntity, Long> {
-    Optional<PlayerEntity> findByUserNameOrEmail(String name, String email);
-    Optional<PlayerEntity> findByUserNameAndPassword(String userName, String password);
-    Optional<PlayerEntity> findByEmailAndPassword(String email, String password);
+    Optional<PlayerEntity>findByUserNameOrEmail(String userName , String email);
 
-    @Query("SELECT p FROM PlayerEntity p " +
-            "WHERE (p.userName LIKE :identity OR p.email LIKE :identity) AND p.password LIKE :password")
-    Optional<PlayerEntity> findByUserNameOrEmailAndPassword(@Param("identity") String identity, @Param("password") String password);
+
+    Optional<PlayerEntity> findByUserNameAndPassword(String username , String password);
+
+
+    Optional<PlayerEntity> findByEmailAndPassword(String email , String password);
+
+
+    @Query("SELECT p FROM PlayerEntity p"+
+            " WHERE (p.userName Like :identity or p.email Like :identity) " +
+            "AND p.password Like :password")
+    Optional<PlayerEntity>findByUserNameOrEmailAndPassword(@Param("identity") String identity , @Param("password") String password );
 }

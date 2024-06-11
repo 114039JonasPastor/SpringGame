@@ -44,7 +44,7 @@ public class PlayerControllerTest {
         player.setUserName("jPastor");
         player.setPassword("Password03#");
 
-        when(playerService.getPlayerById(1L)).thenReturn(player);
+        when(playerService.getPlayerByid(1L)).thenReturn(player);
         this.mockMvc.perform(get("/players/1")).andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.userName").value("jPastor"))
                 .andExpect(jsonPath("$.email").value("email@gmail.com"))

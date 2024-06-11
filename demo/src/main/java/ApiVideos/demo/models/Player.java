@@ -38,6 +38,6 @@ public class Player {
             (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 
     @Schema(title = "Player last login", description = "The player last login", example = "01-01-2020 21:10:50", nullable = true)
-    private LocalDateTime lastLogin;
+    private LocalDateTime lastLoginDate;
 
 }

@@ -9,20 +9,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "identity_type", include = JsonTypeInfo.As.EXISTING_PROPERTY, visible = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME , property = "identity_type" , include = JsonTypeInfo.As.EXTERNAL_PROPERTY , visible = true)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = UserNameIdentity.class, name = "USERNAME"),
-        @JsonSubTypes.Type(value = EmailIdentity.class, name = "EMAIL")
-})
+        @JsonSubTypes.Type(value = UserNameIdentity.class , name = "USERNAME"),
+        @JsonSubTypes.Type(value = EmailIdentity.class , name = "EMAIL")}
+)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Identity {
 
-    @Schema(title = "Type of identity used to logged in",
-            description = "The type of identity provided to logged in",
-            example = "USERNAME or EMAIL",
-            nullable = false)
+    @Schema(title = "Type of identity used to logged in"
+            , description = "The Type of identity used to logged in",
+            example = "USERNAME or EMAIL" , nullable = false)
+
     @NotNull(message = "identity_type cant be null")
     @JsonProperty("identity_type")
     private IdentityType identityType;
