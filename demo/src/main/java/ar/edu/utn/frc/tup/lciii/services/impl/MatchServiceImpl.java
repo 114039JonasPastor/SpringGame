@@ -13,7 +13,9 @@ import org.hibernate.Hibernate;
 import org.hibernate.action.internal.EntityActionVetoException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -79,10 +81,13 @@ public class MatchServiceImpl implements MatchService {
 
     @Transactional
     @Override
-    public Play play(Long matchId, PlayRequest play) {
+    public Play play(Long matchId, PlayRequest playRequest) {
         Match match = this.getMatchById(matchId);
         if(match == null){
             throw new EntityNotFoundException();
+        }
+        if(match.getStatus() != MatchStatus.STARTED){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("The match is %s", match.getStatus()));
         }
         Play play = PlayFactory.getPlayInstance(playRequest, match.getGame().getCode());
         PlayMatch playMatch = playStrategyFactory.getPlayerStrategy(match.getGame().getCode());

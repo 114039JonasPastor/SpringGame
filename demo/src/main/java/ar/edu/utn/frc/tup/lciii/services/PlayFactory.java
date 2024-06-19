@@ -9,9 +9,9 @@ public class PlayFactory {
     public static Play getPlayInstance(PlayRequest playRequest, String gameCode){
         switch (gameCode){
             case "RPS":
-                return getPlayInstance(playRequest);
+                return getPlayRpsInstance(playRequest);
             default:
-                return getPlayInstance(playRequest);
+                return getPlayRpsInstance(playRequest);
         }
     }
 
